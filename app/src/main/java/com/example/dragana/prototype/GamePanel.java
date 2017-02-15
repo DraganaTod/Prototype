@@ -15,7 +15,7 @@ import java.util.Random;
 /**
  * Created by Dragana on 2017-02-06.
  */
-
+/// test for Git
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
@@ -89,6 +89,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
           }
 
               //så att den åker uppåt
+
               player.setUp(true);
 
             return true;
