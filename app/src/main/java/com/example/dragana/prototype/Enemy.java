@@ -60,6 +60,10 @@ public class Enemy extends GameObject{
     public int getWitdh(){
 
         //för att bättre uptäcka kollision
-        return witdh - 10;
+        return witdh - 100;
+    }
+    @Override
+    public int getHeigth(){
+        return heigth - 100;
     }
 }

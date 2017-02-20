@@ -53,7 +53,7 @@ public class Player extends GameObject {
         }
         animation.update();
         if(up){
-            newY = (int)(acc -= 2);
+            newY = (int)(acc -= 4);
 
         }
         else{
@@ -61,7 +61,7 @@ public class Player extends GameObject {
         }
 
         if(newY>2) newY = 2;
-        if(newY<-2) newY = -4;
+        if(newY<-2) newY = -2;
 
         y += newY * 2;
         newY = 0;

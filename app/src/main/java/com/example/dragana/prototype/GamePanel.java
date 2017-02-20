@@ -46,11 +46,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
 
-        back = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.back11));
+        back = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.back1));
         //player = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.draaag), 100, 85, 9);
       //player = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.dragon_red), 390, 280, 7);
        //player = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.helicopter), 65, 25, 3);
-       player = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.dragon), 390, 316, 7);
+      // player = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.dragon), 390, 316, 7);
+        player = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.grumpy_bat), 135, 110, 3);
         enemies = new ArrayList<Enemy>();
         enemyStartTime = System.nanoTime();
 
@@ -111,12 +112,15 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             //lägg till fiender
             long elapsed = (System.nanoTime() - enemyStartTime)/1000000;
             if(elapsed > (2000 - player.getScore()/4)){
+
                 //första på på mitten
                 if(enemies.size() == 0){
-                    enemies.add(new Enemy(BitmapFactory.decodeResource(getResources(),R.drawable.missile), WIDTH + 10, HIGTH/2,46, 15, player.getScore(), 13));
+                   // enemies.add(new Enemy(BitmapFactory.decodeResource(getResources(),R.drawable.missile), WIDTH + 10, HIGTH/2,46, 15, player.getScore(), 13));
+                    enemies.add(new Enemy(BitmapFactory.decodeResource(getResources(),R.drawable.light), WIDTH + 10, 0,200, 200, player.getScore(), 1));
                 }
                 else{
-                    enemies.add(new Enemy(BitmapFactory.decodeResource(getResources(), R.drawable.missile), WIDTH + 10, (int)(rand.nextDouble() * HIGTH), 46,15, player.getScore(), 13));
+                   // enemies.add(new Enemy(BitmapFactory.decodeResource(getResources(), R.drawable.missile), WIDTH + 10, (int)(rand.nextDouble() * HIGTH), 46,15, player.getScore(), 13));
+                    enemies.add(new Enemy(BitmapFactory.decodeResource(getResources(),R.drawable.light), WIDTH + 10, (int)(rand.nextDouble() * HIGTH),200, 200, player.getScore(), 1));
                 }
 
                 //reset
@@ -128,6 +132,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                 if(collision(enemies.get(i), player)){
                     enemies.remove(i);
                     player.setPlaying(false);
+                    back = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.back11));
+                    back.update();
                     break;
                 }
                 //om den är utanför skärmen ta bort den
@@ -137,9 +143,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                 }
             }
         }
+
     }
     public boolean collision(GameObject a, GameObject b){
         if(Rect.intersects(a.getRectangle(), b.getRectangle())){
+
+
             return true;
         }
         return false;
@@ -155,6 +164,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             final int savedScale = canvas.save();
             canvas.scale(scaleX, scaleY);
             back.draw(canvas);
+
+
+
+
             player.draw(canvas);
 
             for(Enemy e: enemies){
